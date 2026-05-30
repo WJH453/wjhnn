@@ -1495,14 +1495,18 @@
         function onEnd() {
             if (!isDragging) return;
             isDragging = false;
-            const pulledToMax = currentPull >= MAX_PULL - 5;
+            const pulledToMax = currentPull >= MAX_PULL - 15;
             catWrapper.classList.remove('pulling');
             catWrapper.style.transform = 'translateY(0px)';
             yarnString.style.height = BASE_YARN + 'px';
             yarnString.style.transition = 'height 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
             yarnBall.style.transform = 'rotate(0deg)';
             if (pulledToMax) {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                setTimeout(function() {
+                    document.documentElement.scrollTop = 0;
+                    document.body.scrollTop = 0;
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 80);
             }
         }
 
