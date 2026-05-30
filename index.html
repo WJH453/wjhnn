@@ -1040,7 +1040,7 @@
                 <span class="cat-face">🐱</span>
                 <span class="yarn-ball" id="yarnBall">🧶</span>
             </div>
-            <p class="pull-hint">拽一下试试 ↓</p>
+            <p class="pull-hint">拉到底 回顶部 ↑</p>
         </div>
 
         <p style="text-align: center; margin-top: 4rem; font-size: 10px; font-weight: 900; letter-spacing: 3px; color: #bbb; text-transform: uppercase;">
@@ -1495,11 +1495,15 @@
         function onEnd() {
             if (!isDragging) return;
             isDragging = false;
+            const pulledToMax = currentPull >= MAX_PULL - 5;
             catWrapper.classList.remove('pulling');
             catWrapper.style.transform = 'translateY(0px)';
             yarnString.style.height = BASE_YARN + 'px';
             yarnString.style.transition = 'height 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
             yarnBall.style.transform = 'rotate(0deg)';
+            if (pulledToMax) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
         }
 
         catWrapper.addEventListener('mousedown', onStart);
