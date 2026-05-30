@@ -570,6 +570,191 @@
             margin-bottom: 0.6rem;
             display: block;
         }
+
+        /* --- 3D 翻转容器 --- */
+        .guestbook-flip-container {
+            perspective: 1500px;
+            width: 100%;
+        }
+
+        .guestbook-flipper {
+            display: grid;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+        }
+
+        .guestbook-flipper.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .guestbook-front,
+        .guestbook-back {
+            grid-area: 1 / 1;
+            backface-visibility: hidden;
+        }
+
+        .guestbook-back {
+            transform: rotateY(180deg);
+        }
+
+        /* --- 正面：软木板便签封面 --- */
+        .corkboard-cover {
+            background-color: #c4956a;
+            background-image:
+                radial-gradient(ellipse at 12% 18%, rgba(139,90,43,0.35) 0.5px, transparent 0.5px),
+                radial-gradient(ellipse at 42% 52%, rgba(139,90,43,0.28) 0.8px, transparent 0.8px),
+                radial-gradient(ellipse at 72% 10%, rgba(139,90,43,0.4) 0.6px, transparent 0.6px),
+                radial-gradient(ellipse at 28% 72%, rgba(139,90,43,0.3) 1px, transparent 1px),
+                radial-gradient(ellipse at 82% 62%, rgba(139,90,43,0.35) 0.5px, transparent 0.5px),
+                radial-gradient(ellipse at 58% 28%, rgba(139,90,43,0.28) 0.9px, transparent 0.9px),
+                radial-gradient(ellipse at 8% 45%, rgba(139,90,43,0.32) 0.7px, transparent 0.7px),
+                radial-gradient(ellipse at 52% 82%, rgba(139,90,43,0.38) 0.8px, transparent 0.8px),
+                radial-gradient(ellipse at 90% 35%, rgba(139,90,43,0.28) 0.6px, transparent 0.6px),
+                radial-gradient(ellipse at 18% 88%, rgba(139,90,43,0.25) 0.9px, transparent 0.9px);
+            border: 10px solid #8B5A2B;
+            border-radius: 8px;
+            box-shadow:
+                inset 0 0 50px rgba(0,0,0,0.06),
+                3px 3px 0px #6b3f1f,
+                8px 8px 24px rgba(0,0,0,0.1);
+            padding: 2rem 2rem 1.5rem;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+        }
+
+        /* 散落图钉装饰 */
+        .deco-pin {
+            position: absolute;
+            font-size: 1.4rem;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.25));
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* 纸胶带装饰 */
+        .washi-tape {
+            position: absolute;
+            height: 22px;
+            border-radius: 2px;
+            opacity: 0.55;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* 便签网格 */
+        .notes-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem 1.8rem;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0.5rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 便签纸 */
+        .sticky-note {
+            padding: 1rem 1.1rem 0.8rem;
+            border-radius: 2px 2px 8px 2px;
+            box-shadow: 1px 2px 5px rgba(0,0,0,0.1), 3px 3px 0px rgba(0,0,0,0.04);
+            position: relative;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+            cursor: default;
+            text-align: center;
+            min-width: 110px;
+            max-width: 160px;
+        }
+        .sticky-note:hover {
+            transform: rotate(0deg) translateY(-5px) !important;
+            box-shadow: 2px 6px 14px rgba(0,0,0,0.14);
+            z-index: 5;
+        }
+        .sticky-note .note-pin {
+            font-size: 1rem;
+            display: block;
+            margin-bottom: 0.3rem;
+            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2));
+        }
+        .sticky-note p {
+            margin: 0;
+            font-weight: 800;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #444;
+        }
+
+        .note-yellow { background: #fff9c4; }
+        .note-pink  { background: #ffe4e9; }
+        .note-blue  { background: #e3f0ff; }
+        .note-mint  { background: #e0faf0; }
+        .note-cream { background: #fffdf5; }
+
+        /* CTA 卡片 */
+        .cta-card {
+            background: #fff;
+            border-radius: 3px;
+            padding: 1.3rem 2.2rem 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1), 4px 4px 0px rgba(0,0,0,0.06);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            position: relative;
+            z-index: 3;
+            margin-top: 0.5rem;
+        }
+        .cta-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15), 6px 6px 0px rgba(0,0,0,0.08);
+        }
+        .cta-card:active {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+        }
+        .cta-pin {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 0.2rem;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.25));
+        }
+        .cta-text {
+            font-weight: 900;
+            font-size: 1.1rem;
+            color: #333;
+            letter-spacing: 6px;
+            margin: 0;
+        }
+        .cta-arrow {
+            display: block;
+            font-size: 1.2rem;
+            color: #8B5A2B;
+            margin-top: 0.2rem;
+            font-weight: 900;
+        }
+
+        /* 背面翻回按钮 */
+        .flip-back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            color: #8B5A2B;
+            font-weight: 800;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            transition: color 0.3s;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+        .flip-back-btn:hover {
+            color: #6b3f1f;
+        }
     </style>
     <!-- 移除 SDK，使用原生 fetch API -->
 </head>
@@ -706,18 +891,73 @@
             <a href="mailto:w18954286651@163.com" class="footer-link">邮箱：w18954286651@163.com</a>
         </div>
 
-        <!-- 留言板 - 拍立得软木板 -->
+        <!-- 留言板 - 3D 翻转 -->
         <div id="section-guestbook" class="guestbook-section">
             <div class="section-header"><span class="section-title">04 / 留言板</span><div class="section-line"></div></div>
-            <div class="guestbook-container">
-                <div class="guestbook-form">
-                    <div class="form-title">贴一张留言</div>
-                    <input type="text" id="guestName" class="form-input" placeholder="你的昵称" required>
-                    <textarea id="guestMessage" class="form-input form-textarea" placeholder="写下你想说的话..." required></textarea>
-                    <button id="submitBtn" class="submit-btn" onclick="submitMessage()">📌 钉上去</button>
-                </div>
-                <div class="messages-list" id="messagesList">
-                    <div class="loading-state">加载留言中...</div>
+
+            <div class="guestbook-flip-container">
+                <div class="guestbook-flipper" id="guestbookFlipper">
+
+                    <!-- ═══ 正面：软木板便签封面 ═══ -->
+                    <div class="guestbook-front">
+                        <div class="corkboard-cover">
+
+                            <span class="deco-pin" style="top:4%;left:6%;">📌</span>
+                            <span class="deco-pin" style="top:10%;right:8%;">📌</span>
+                            <span class="deco-pin" style="bottom:22%;left:10%;">📌</span>
+                            <span class="deco-pin" style="bottom:12%;right:14%;">📌</span>
+
+                            <span class="washi-tape" style="top:7%;right:18%;transform:rotate(14deg);width:55px;background:#f4c7d4;"></span>
+                            <span class="washi-tape" style="bottom:18%;left:12%;transform:rotate(-10deg);width:48px;background:#c7e4f4;"></span>
+
+                            <div class="notes-grid">
+                                <div class="sticky-note note-yellow" style="transform:rotate(-3.2deg);">
+                                    <span class="note-pin">📌</span>
+                                    <p>欢迎写下<br>你的想法</p>
+                                </div>
+                                <div class="sticky-note note-pink" style="transform:rotate(2.5deg);">
+                                    <span class="note-pin">📌</span>
+                                    <p>或好或坏</p>
+                                </div>
+                                <div class="sticky-note note-blue" style="transform:rotate(-1.8deg);">
+                                    <span class="note-pin">📌</span>
+                                    <p>或长或短</p>
+                                </div>
+                                <div class="sticky-note note-mint" style="transform:rotate(2.8deg);">
+                                    <span class="note-pin">📌</span>
+                                    <p>每一条都会被<br>认真对待</p>
+                                </div>
+                                <div class="sticky-note note-cream" style="transform:rotate(-2.5deg);">
+                                    <span class="note-pin">📌</span>
+                                    <p>你的故事<br>我很想听</p>
+                                </div>
+                            </div>
+
+                            <div class="cta-card" onclick="flipGuestbook()">
+                                <span class="cta-pin">📌</span>
+                                <p class="cta-text">翻 开 来 写</p>
+                                <span class="cta-arrow">→</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- ═══ 背面：拍立得留言板 ═══ -->
+                    <div class="guestbook-back">
+                        <a class="flip-back-btn" onclick="flipGuestbook()">← 翻回封面</a>
+                        <div class="guestbook-container">
+                            <div class="guestbook-form">
+                                <div class="form-title">贴一张留言</div>
+                                <input type="text" id="guestName" class="form-input" placeholder="你的昵称" required>
+                                <textarea id="guestMessage" class="form-input form-textarea" placeholder="写下你想说的话..." required></textarea>
+                                <button id="submitBtn" class="submit-btn" onclick="submitMessage()">📌 钉上去</button>
+                            </div>
+                            <div class="messages-list" id="messagesList">
+                                <div class="loading-state">加载留言中...</div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -1137,6 +1377,12 @@
         hScroll.resize();
         initGuestbook();
     };
+
+    // --- 留言板翻转 ---
+    function flipGuestbook() {
+        const flipper = document.getElementById('guestbookFlipper');
+        flipper.classList.toggle('flipped');
+    }
 
     // --- 留言板功能代码 ---
     const SUPABASE_URL = 'https://tdwaeekscqntyaehjhoq.supabase.co';
