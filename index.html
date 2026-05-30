@@ -755,6 +755,77 @@
         .flip-back-btn:hover {
             color: #6b3f1f;
         }
+
+        /* --- 猫咪拉绳挂件 --- */
+        .cat-pull-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 0.8rem;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .yarn-string {
+            width: 5px;
+            height: 32px;
+            background: repeating-linear-gradient(
+                90deg,
+                #d4454a 0px, #d4454a 2.5px,
+                #e86060 2.5px, #e86060 4px,
+                #c0392b 4px, #c0392b 5px
+            );
+            border-radius: 3px;
+            position: relative;
+            transition: height 0.15s ease-out;
+        }
+        .yarn-string::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: -3px;
+            width: 11px;
+            height: 2px;
+            background: #d4454a;
+            border-radius: 1px;
+            transform: translateY(-50%) rotate(-8deg);
+        }
+
+        .cat-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: grab;
+            transition: transform 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        .cat-wrapper:active {
+            cursor: grabbing;
+        }
+        .cat-wrapper.pulling {
+            transition: none;
+        }
+
+        .cat-face {
+            font-size: 2.2rem;
+            filter: drop-shadow(0 3px 4px rgba(0,0,0,0.15));
+            pointer-events: none;
+        }
+
+        .yarn-ball {
+            font-size: 1.4rem;
+            pointer-events: none;
+            transition: transform 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .pull-hint {
+            margin-top: 0.3rem;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #ccc;
+            letter-spacing: 2px;
+            pointer-events: none;
+        }
     </style>
     <!-- 移除 SDK，使用原生 fetch API -->
 </head>
@@ -960,6 +1031,16 @@
             <a href="tel:13407600300" class="footer-link">电话：13407600300</a>
             <span class="dot-sep" style="color:#ddd;">|</span>
             <a href="mailto:w18954286651@163.com" class="footer-link">邮箱：w18954286651@163.com</a>
+        </div>
+
+        <!-- 猫咪拉绳挂件 -->
+        <div class="cat-pull-container">
+            <div class="yarn-string" id="yarnString"></div>
+            <div class="cat-wrapper" id="catWrapper">
+                <span class="cat-face">🐱</span>
+                <span class="yarn-ball" id="yarnBall">🧶</span>
+            </div>
+            <p class="pull-hint">拽一下试试 ↓</p>
         </div>
 
         <p style="text-align: center; margin-top: 4rem; font-size: 10px; font-weight: 900; letter-spacing: 3px; color: #bbb; text-transform: uppercase;">
@@ -1377,6 +1458,57 @@
         hScroll.resize();
         initGuestbook();
     };
+
+    // --- 猫咪拉绳挂件 ---
+    (function initCatPull() {
+        const catWrapper = document.getElementById('catWrapper');
+        const yarnString = document.getElementById('yarnString');
+        const yarnBall = document.getElementById('yarnBall');
+        const MAX_PULL = 50;  // 最大下拉距离
+        const BASE_YARN = 32; // 毛线原始高度
+
+        let startY = 0;
+        let currentPull = 0;
+        let isDragging = false;
+
+        function onStart(e) {
+            isDragging = true;
+            startY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+            catWrapper.classList.add('pulling');
+            yarnString.style.transition = 'none';
+        }
+
+        function onMove(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+            const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+            const delta = clientY - startY;
+            currentPull = Math.max(0, Math.min(delta, MAX_PULL));
+
+            catWrapper.style.transform = `translateY(${currentPull}px)`;
+            yarnString.style.height = (BASE_YARN + currentPull * 0.35) + 'px';
+
+            const ballRotation = currentPull * 2.5;
+            yarnBall.style.transform = `rotate(${ballRotation}deg)`;
+        }
+
+        function onEnd() {
+            if (!isDragging) return;
+            isDragging = false;
+            catWrapper.classList.remove('pulling');
+            catWrapper.style.transform = 'translateY(0px)';
+            yarnString.style.height = BASE_YARN + 'px';
+            yarnString.style.transition = 'height 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            yarnBall.style.transform = 'rotate(0deg)';
+        }
+
+        catWrapper.addEventListener('mousedown', onStart);
+        catWrapper.addEventListener('touchstart', onStart, { passive: false });
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('touchmove', onMove, { passive: false });
+        document.addEventListener('mouseup', onEnd);
+        document.addEventListener('touchend', onEnd);
+    })();
 
     // --- 留言板翻转 ---
     function flipGuestbook() {
