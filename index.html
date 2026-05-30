@@ -321,162 +321,254 @@
             .dot-sep { display: none; }
         }
 
-        /* --- 留言板样式 --- */
+        /* --- 留言板 - 拍立得软木板 --- */
         .guestbook-section {
             margin-top: 4rem;
             padding-bottom: 4rem;
         }
 
         .guestbook-container {
-            background: #fff;
-            border: 2px solid #000;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 8px 8px 0px rgba(0,0,0,0.05);
+            background-color: #c4956a;
+            background-image:
+                radial-gradient(ellipse at 12% 18%, rgba(139,90,43,0.35) 0.5px, transparent 0.5px),
+                radial-gradient(ellipse at 42% 52%, rgba(139,90,43,0.28) 0.8px, transparent 0.8px),
+                radial-gradient(ellipse at 72% 10%, rgba(139,90,43,0.4) 0.6px, transparent 0.6px),
+                radial-gradient(ellipse at 28% 72%, rgba(139,90,43,0.3) 1px, transparent 1px),
+                radial-gradient(ellipse at 82% 62%, rgba(139,90,43,0.35) 0.5px, transparent 0.5px),
+                radial-gradient(ellipse at 58% 28%, rgba(139,90,43,0.28) 0.9px, transparent 0.9px),
+                radial-gradient(ellipse at 8% 45%, rgba(139,90,43,0.32) 0.7px, transparent 0.7px),
+                radial-gradient(ellipse at 52% 82%, rgba(139,90,43,0.38) 0.8px, transparent 0.8px),
+                radial-gradient(ellipse at 90% 35%, rgba(139,90,43,0.28) 0.6px, transparent 0.6px),
+                radial-gradient(ellipse at 18% 88%, rgba(139,90,43,0.25) 0.9px, transparent 0.9px);
+            border: 10px solid #8B5A2B;
+            border-radius: 8px;
+            box-shadow:
+                inset 0 0 50px rgba(0,0,0,0.06),
+                3px 3px 0px #6b3f1f,
+                8px 8px 24px rgba(0,0,0,0.1);
+            padding: 1.8rem;
         }
 
         .guestbook-form {
-            padding: 3rem;
-            border-bottom: 1px solid #eee;
-            background: linear-gradient(135deg, #fafafa 0%, #fff 100%);
+            background: #fff9c4;
+            background-image: linear-gradient(180deg, rgba(255,255,255,0.35) 0%, transparent 45%);
+            border-radius: 2px 2px 10px 2px;
+            padding: 1.5rem 1.8rem 1.5rem;
+            margin-bottom: 2.2rem;
+            position: relative;
+            box-shadow: 2px 3px 10px rgba(0,0,0,0.1), 5px 6px 0px rgba(0,0,0,0.04);
+            transform: rotate(-0.6deg);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .guestbook-form:hover {
+            transform: rotate(0deg) translateY(-3px);
+            box-shadow: 3px 5px 16px rgba(0,0,0,0.15), 7px 9px 0px rgba(0,0,0,0.06);
+        }
+
+        .guestbook-form::before {
+            content: "📌";
+            position: absolute;
+            top: -17px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+            z-index: 2;
+        }
+
+        .guestbook-form::after {
+            content: "";
+            position: absolute;
+            top: -4px;
+            left: 22%;
+            width: 45px;
+            height: 16px;
+            background: rgba(255,255,255,0.55);
+            border-radius: 1px;
+            transform: rotate(-4deg);
+            filter: blur(1px);
+        }
+
+        .form-title {
+            font-weight: 900;
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 1rem;
+            text-align: center;
+            letter-spacing: 2px;
         }
 
         .form-input {
             width: 100%;
-            padding: 1rem 1.5rem;
-            border: 2px solid #ddd;
-            border-radius: 12px;
-            font-size: 1rem;
+            padding: 0.8rem 1rem;
+            border: 1.5px solid #e5dfb0;
+            border-radius: 6px;
+            font-size: 0.95rem;
             font-family: inherit;
+            background: rgba(255,255,255,0.65);
             transition: all 0.3s ease;
-            margin-bottom: 1rem;
+            margin-bottom: 0.7rem;
             box-sizing: border-box;
+            color: #333;
         }
 
         .form-input:focus {
             outline: none;
-            border-color: #000;
-            box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            border-color: #c4956a;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(196,149,106,0.15);
         }
 
         .form-textarea {
-            min-height: 120px;
+            min-height: 90px;
             resize: vertical;
         }
 
         .submit-btn {
-            background: #000;
+            background: #8B5A2B;
             color: #fff;
-            padding: 1rem 2.5rem;
+            padding: 0.7rem 1.8rem;
             border: none;
-            border-radius: 12px;
+            border-radius: 20px;
             font-weight: 900;
-            font-size: 1rem;
+            font-size: 0.85rem;
             cursor: pointer;
             transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 5px;
+            letter-spacing: 1px;
         }
 
         .submit-btn:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 4px 4px 0px var(--accent);
+            background: #6b3f1f;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(107,63,31,0.3);
         }
 
         .submit-btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
         .messages-list {
-            padding: 3rem;
-            max-height: 600px;
-            overflow-y: auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            padding: 0.3rem;
         }
 
         .message-card {
-            padding: 1.5rem;
-            border: 1px solid #eee;
-            border-radius: 16px;
-            margin-bottom: 1rem;
-            background: #fafafa;
-            transition: all 0.3s ease;
+            background: #fff;
+            border-radius: 3px;
+            padding: 1.2rem 1.3rem 2.2rem;
+            width: 220px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+            position: relative;
+            transition: all 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: default;
+            display: flex;
+            flex-direction: column;
         }
 
         .message-card:hover {
-            border-color: #000;
-            transform: translateX(5px);
-            background: #fff;
+            transform: translateY(-10px) rotate(0deg) !important;
+            box-shadow: 0 14px 32px rgba(0,0,0,0.16);
+            z-index: 10;
         }
 
-        .message-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.8rem;
+        .message-card::before {
+            content: "";
+            position: absolute;
+            top: 7px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--pin-color, #ff4d00);
+            box-shadow: inset 0 -2px 3px rgba(0,0,0,0.25), 0 2px 3px rgba(0,0,0,0.12);
+        }
+
+        .message-card::after {
+            content: "";
+            position: absolute;
+            top: 9px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.55);
         }
 
         .message-name {
             font-weight: 900;
-            font-size: 1.1rem;
-            color: #000;
-        }
-
-        .message-date {
-            font-size: 0.85rem;
-            color: #888;
-            font-weight: 700;
+            font-size: 0.95rem;
+            color: #222;
+            text-align: center;
+            padding-top: 0.7rem;
+            word-break: break-word;
         }
 
         .message-content {
-            color: #444;
-            line-height: 1.6;
+            color: #555;
+            line-height: 1.5;
+            font-size: 0.85rem;
+            text-align: center;
+            word-break: break-word;
+            margin-top: 0.5rem;
+            flex: 1;
         }
 
-        .loading-state {
-            text-align: center;
-            padding: 2rem;
-            color: #888;
+        .message-date {
+            font-size: 0.65rem;
+            color: #bbb;
             font-weight: 700;
-        }
-
-        .empty-state {
             text-align: center;
-            padding: 3rem;
-            color: #888;
-        }
-
-        .empty-state-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            margin-top: 0.7rem;
+            padding-top: 0.5rem;
+            border-top: 1px dashed #eee;
         }
 
         .message-actions {
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid #eee;
+            text-align: center;
+            margin-top: 0.3rem;
         }
 
         .delete-btn {
-            background: #ff4757;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-weight: bold;
+            background: none;
+            border: 1px solid transparent;
+            color: #ccc;
+            font-size: 0.65rem;
             cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
+            padding: 3px 8px;
+            font-weight: 700;
+            border-radius: 10px;
         }
 
         .delete-btn:hover {
-            background: #ff3838;
-            transform: scale(1.05);
+            color: #ff4757;
+            border-color: #ff4757;
+            background: rgba(255,71,87,0.04);
         }
 
-        .delete-btn:active {
-            transform: scale(0.95);
+        .loading-state, .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #8B5A2B;
+            font-weight: 700;
+            width: 100%;
+        }
+
+        .empty-state-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.6rem;
+            display: block;
         }
     </style>
     <!-- 移除 SDK，使用原生 fetch API -->
@@ -614,16 +706,15 @@
             <a href="mailto:w18954286651@163.com" class="footer-link">邮箱：w18954286651@163.com</a>
         </div>
 
-        <!-- 留言板 -->
+        <!-- 留言板 - 拍立得软木板 -->
         <div id="section-guestbook" class="guestbook-section">
             <div class="section-header"><span class="section-title">04 / 留言板</span><div class="section-line"></div></div>
             <div class="guestbook-container">
                 <div class="guestbook-form">
+                    <div class="form-title">贴一张留言</div>
                     <input type="text" id="guestName" class="form-input" placeholder="你的昵称" required>
                     <textarea id="guestMessage" class="form-input form-textarea" placeholder="写下你想说的话..." required></textarea>
-                    <button id="submitBtn" class="submit-btn" onclick="submitMessage()">
-                        <span>💬</span> 发送留言
-                    </button>
+                    <button id="submitBtn" class="submit-btn" onclick="submitMessage()">📌 钉上去</button>
                 </div>
                 <div class="messages-list" id="messagesList">
                     <div class="loading-state">加载留言中...</div>
@@ -1049,10 +1140,21 @@
 
     // --- 留言板功能代码 ---
     const SUPABASE_URL = 'https://tdwaeekscqntyaehjhoq.supabase.co';
-    const SUPABASE_KEY = 'sb_publishable_cLqN6QPjNLRJU7BwbKCroA__jJm5jzW';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRkd2FlZWtzY3FudHlhZWhqaG9xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzODYzMjAsImV4cCI6MjA5Mzk2MjMyMH0.ixHisrlapJdg_7hz0K3v6c3pfR5bmlWgQsQYVc9JTA4';
+    const USE_LOCAL_STORAGE = false; // 使用 Supabase 云端数据库
     
     function initGuestbook() {
         loadMessages();
+    }
+    
+    // 本地存储辅助函数
+    function getLocalMessages() {
+        const stored = localStorage.getItem('guestbook_messages');
+        return stored ? JSON.parse(stored) : [];
+    }
+    
+    function saveLocalMessages(messages) {
+        localStorage.setItem('guestbook_messages', JSON.stringify(messages));
     }
 
     // 格式化日期
@@ -1078,33 +1180,35 @@
     }
 
     // 渲染留言列表
+    const PIN_COLORS = ['#003399', '#4a90e2', '#00cc66', '#ff4d00', '#ff3366', '#8B5A2B', '#cc8800'];
+
     function renderMessages(messages) {
         const container = document.getElementById('messagesList');
-        
+
         if (!messages || messages.length === 0) {
             container.innerHTML = `
                 <div class="empty-state">
-                    <div class="empty-state-icon">💬</div>
-                    <p>还没有人留言，来做第一个留言的人吧！</p>
+                    <span class="empty-state-icon">📷</span>
+                    <p>软木板上还没有拍立得，来贴第一张留言吧！</p>
                 </div>
             `;
             return;
         }
-        
-        container.innerHTML = messages.map(msg => `
-            <div class="message-card" id="msg-${msg.id}">
-                <div class="message-header">
-                    <span class="message-name">${escapeHtml(msg.name)}</span>
-                    <span class="message-date">${formatDate(msg.created_at)}</span>
-                </div>
+
+        container.innerHTML = messages.map((msg, i) => {
+            const pinColor = PIN_COLORS[i % PIN_COLORS.length];
+            const rotation = ((msg.id % 7) - 3) * 0.7;
+            return `
+            <div class="message-card" id="msg-${msg.id}" style="transform: rotate(${rotation}deg); --pin-color: ${pinColor};">
+                <span class="message-name">${escapeHtml(msg.name)}</span>
                 <div class="message-content">${escapeHtml(msg.message)}</div>
+                <span class="message-date">${formatDate(msg.created_at)}</span>
                 <div class="message-actions">
-                    <button class="delete-btn" onclick="deleteMessage(${msg.id}, '${escapeHtml(msg.name)}')">
-                        🗑️ 删除此留言
-                    </button>
+                    <button class="delete-btn" onclick="deleteMessage(${msg.id}, '${escapeHtml(msg.name)}')">× 撕掉</button>
                 </div>
             </div>
-        `).join('');
+            `;
+        }).join('');
     }
 
     // HTML 转义防止 XSS
@@ -1119,8 +1223,19 @@
         const container = document.getElementById('messagesList');
         container.innerHTML = '<div class="loading-state">加载留言中...</div>';
         
+        if (USE_LOCAL_STORAGE) {
+            try {
+                const messages = getLocalMessages();
+                console.log('使用本地存储加载留言:', messages);
+                renderMessages(messages);
+                return;
+            } catch (error) {
+                console.warn('本地存储加载失败，尝试 Supabase:', error);
+            }
+        }
+        
         try {
-            console.log('正在加载留言...');
+            console.log('正在从 Supabase 加载留言...');
             
             const response = await fetch(`${SUPABASE_URL}/rest/v1/guestbook?select=*&order=created_at.desc`, {
                 method: 'GET',
@@ -1147,9 +1262,16 @@
                 <div class="empty-state">
                     <div class="empty-state-icon">⚠️</div>
                     <p>加载失败！错误：${error.message || JSON.stringify(error)}</p>
-                    <p style="font-size: 12px; margin-top: 10px;">请确保数据库表已创建并配置了安全策略</p>
+                    <p style="font-size: 12px; margin-top: 10px;">当前使用本地存储模式，留言将保存到浏览器</p>
                 </div>
             `;
+            // 即使 Supabase 失败，也尝试加载本地存储的数据
+            setTimeout(() => {
+                const messages = getLocalMessages();
+                if (messages.length > 0) {
+                    renderMessages(messages);
+                }
+            }, 1000);
         }
     }
 
@@ -1168,10 +1290,40 @@
         }
         
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<span>⏳</span> 发送中...';
+        submitBtn.innerHTML = '<span>⏳</span> 钉上去中...';
+        
+        const newMessage = {
+            id: Date.now(),
+            name: name,
+            message: message,
+            created_at: new Date().toISOString()
+        };
+        
+        if (USE_LOCAL_STORAGE) {
+            try {
+                const messages = getLocalMessages();
+                messages.unshift(newMessage);
+                saveLocalMessages(messages);
+                console.log('保存到本地存储:', newMessage);
+                
+                // 清空输入
+                nameInput.value = '';
+                messageInput.value = '';
+                
+                // 重新加载留言列表
+                loadMessages();
+                
+                alert('留言发送成功！(本地存储)');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '📌 钉上去';
+                return;
+            } catch (error) {
+                console.warn('本地存储保存失败，尝试 Supabase:', error);
+            }
+        }
         
         try {
-            console.log('正在发送留言...', { name, message });
+            console.log('正在发送留言到 Supabase...', { name, message });
             
             const response = await fetch(`${SUPABASE_URL}/rest/v1/guestbook`, {
                 method: 'POST',
@@ -1208,7 +1360,7 @@
             alert(`发送失败！错误：${error.message || JSON.stringify(error)}`);
         } finally {
             submitBtn.disabled = false;
-            submitBtn.innerHTML = '<span>💬</span> 发送留言';
+            submitBtn.innerHTML = '📌 钉上去';
         }
     }
 
@@ -1230,8 +1382,22 @@
             return;
         }
         
+        if (USE_LOCAL_STORAGE) {
+            try {
+                const messages = getLocalMessages();
+                const filteredMessages = messages.filter(m => m.id !== msgId);
+                saveLocalMessages(filteredMessages);
+                console.log('从本地存储删除留言 ID:', msgId);
+                alert('留言删除成功！(本地存储)');
+                loadMessages();
+                return;
+            } catch (error) {
+                console.warn('本地存储删除失败，尝试 Supabase:', error);
+            }
+        }
+        
         try {
-            console.log('正在删除留言 ID:', msgId);
+            console.log('正在从 Supabase 删除留言 ID:', msgId);
             
             const response = await fetch(`${SUPABASE_URL}/rest/v1/guestbook?id=eq.${msgId}`, {
                 method: 'DELETE',
